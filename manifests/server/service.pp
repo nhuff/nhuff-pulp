@@ -12,7 +12,7 @@ class pulp::server::service {
       #the init script
       exec{'pulp-init':
         command => '/sbin/service pulp init',
-        unless  => 'test -e /var/lib/pulp/init.flag',
+        unless  => '/usr/bin/test -e /var/lib/pulp/init.flag',
         before  => Service[$pulp::server::services],
       }
     }
