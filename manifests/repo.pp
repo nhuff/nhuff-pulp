@@ -3,8 +3,8 @@ class pulp::repo {
     'redhat': {
       $repourl = $::operatingsystem ? {
         /(.ed.at|.ent..)/ => 'http://repos.fedorapeople.org/repos/pulp/pulp/v1/stable/$releasever/$basearch/',
-        'fedora' => 'http://repos.fedorapeople.org/repos/pulp/pulp/v1/stable/fedora-$releasever/$basearch/',
-        default  => '',
+        'fedora'          => 'http://repos.fedorapeople.org/repos/pulp/pulp/v1/stable/fedora-$releasever/$basearch/',
+        default           => '',
       }
 
       yumrepo{'pulp':
