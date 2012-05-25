@@ -11,7 +11,7 @@ class pulp::server::service {
       #This feels dirty, but there isn't a way around it without replacing
       #the init script
       exec{'pulp-init':
-        command => '/sbin/service pulp init',
+        command => '/sbin/service pulp-server init',
         unless  => '/usr/bin/test -e /var/lib/pulp/init.flag',
         before  => Service[$pulp::server::services],
       }
