@@ -1,4 +1,7 @@
-class pulp::server::config {
+class pulp::server::config (
+$adminuser,
+$adminpass
+) {
   file{$pulp::server::config:
     ensure  => 'file',
     owner   => 'root',

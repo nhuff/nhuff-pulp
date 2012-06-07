@@ -2,14 +2,20 @@ class pulp::server (
 $packages=$pulp::params::serverpkgs,
 $withrepo=$pulp::params::withrepo,
 $services=$pulp::params::serversvcs,
-$config=$pulp::params::serverconfig
+$config=$pulp::params::serverconfig,
+$adminuser='admin',
+$adminpass='admin'
 ) inherits pulp::params {
   anchor{'pulp::server::start':}
   anchor{'pulp::server::end':}
 
   include pulp::server::package
-  include pulp::server::config
   include pulp::server::service
+
+  class{'pulp::server::config':
+    adminuser => $adminuser,
+    adminpass => $adminpass,
+  }
 
   Anchor['pulp::server::start']   -> Class['pulp::server::package']
   Class['pulp::server::package']  ~> Class['pulp::server::service']
