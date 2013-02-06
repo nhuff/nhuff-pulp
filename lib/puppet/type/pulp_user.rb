@@ -23,11 +23,16 @@ Puppet::Type.newtype(:pulp_user) do
   end
 
   newproperty(:password) do
-    desc "Initial password for user"
+    desc "Password for user"
   end
 
-  newproperty(:descr) do
+  newproperty(:description) do
     desc "Display name of user"
+  end
+
+  newproperty(:roles, :array_matching => :all) do
+    defaultto []
+    desc "Roles this user should be in"
   end
 
   newparam(:pulp_user) do
@@ -38,7 +43,7 @@ Puppet::Type.newtype(:pulp_user) do
     desc "Password to use for auth with pulp server"
   end
 
-  autorequire(:service) do
-    ['pulp-server']
+  autorequire(:pulp_role) do
+    self[:roles]
   end
 end 

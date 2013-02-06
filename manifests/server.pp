@@ -18,6 +18,13 @@ $config         = $pulp::params::serverconfig,
   include pulp::server::config
   #include pulp::server::service
 
+  file{"${::puppet_vardir}/pulp.json":
+    ensure  => 'file',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0640',
+    content => "{\"user\": \"${admin_user}\",\"pass\": \"${admin_pass}\"}",
+  }
 
   Anchor['pulp::server::start']   -> Class['pulp::server::package']
   Class['pulp::server::package']  -> Class['pulp::server::config']
