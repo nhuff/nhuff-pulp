@@ -1,21 +1,19 @@
 class pulp::admin (
-$server,
-$withrepo = $pulp::params::withrepo,
-$config   = $pulp::params::adminconfig,
-$packages = $pulp::params::adminpkgs
+  $server   = $pulp::params::pulp_server,
+  $packages = $pulp::params::adminpkgs,
+  $config   = $pulp::params::adminconfig,
+  $withrepo = true,
 ) inherits pulp::params {
 
   package{$packages:
     ensure => 'installed',
   }
 
-  file{$config:
-    ensure  => 'file',
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    content => template('pulp/admin.conf.erb'),
-    require => Package[$packages],
+  file_line{'pulp_hostname':
+    path    => $config,
+    match   => 'host.*=.*',
+    line    => "host = ${server}",
+    require => Package[$packages]
   }
 
   if $withrepo {

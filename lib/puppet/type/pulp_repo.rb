@@ -37,4 +37,8 @@ Puppet::Type.newtype(:pulp_repo) do
   newproperty(:feed) do
     desc "Set the feed to pull from"
   end
+
+  autorequire(:service) do
+    ['pulp-server']
+  end
 end
