@@ -1,5 +1,5 @@
 name 'nhuff-pulp'
-version '0.1.0'
+version '0.1.1'
 license 'Apache 2.0'
 dendency 'puppetlabs/stdlib', '>= 2.0.0'
 source 'git://github.com/nhuff/nhuff-pulp.git'
