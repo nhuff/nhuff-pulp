@@ -2,8 +2,8 @@ class pulp::repo {
   case $::osfamily {
     'redhat': {
       $repourl = $::operatingsystem ? {
-        /(.ed.at|.ent..)/ => 'http://repos.fedorapeople.org/repos/pulp/pulp/v2/stable/$releasever/$basearch/',
-        'fedora'          => 'http://repos.fedorapeople.org/repos/pulp/pulp/v2/stable/fedora-$releasever/$basearch/',
+        /(.ed.at|.ent..)/ => 'http://repos.fedorapeople.org/repos/pulp/pulp/stable/2/$releasever/$basearch/',
+        'fedora'          => 'http://repos.fedorapeople.org/repos/pulp/pulp/stable/2/fedora-$releasever/$basearch/',
         default           => '',
       }
 
